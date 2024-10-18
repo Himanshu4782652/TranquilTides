@@ -1,20 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
-    <section class="results">
+    <section class="results-page">
         <h2>Assessment Results</h2>
-        <p>Your mood prediction is: <strong>{{ prediction }}</strong></p>
-        <p>Likelihood of Eating Disorder: <strong>{{ eating_disorder_prob }}%</strong></p>
+        <p>Based on your inputs, here's your mood prediction:</p>
 
-        <div class="suggestions">
-            <h3>Suggestions for Relaxation:</h3>
-            <ul>
-                <li>Practice deep breathing exercises</li>
-                <li>Engage in physical activities</li>
-                <li>Meditation and mindfulness techniques</li>
-                <li>Talk to a mental health professional</li>
-            </ul>
+        <div class="result-card">
+            <h3>Prediction: {{ prediction }}</h3>
+            <p>Anxiety: {{ anxiety }}</p>
+            <p>Depression: {{ depression }}</p>
+            <p>Schizophrenia: {{ schizophrenia }}</p>
+            <p>Bipolar: {{ bipolar }}</p>
         </div>
 
-        <a href="{{ url_for('relaxation') }}" class="btn">Learn More Relaxation Techniques</a>
+        <a href="{{ url_for('relaxation') }}" class="btn">Explore Relaxation Techniques</a>
     </section>
 {% endblock %}

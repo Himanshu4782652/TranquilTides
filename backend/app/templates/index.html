@@ -1,8 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
-    <section class="hero">
-        <h1>Welcome to TranquilTides</h1>
-        <p>Your journey to mental well-being starts here. Take the first step by assessing your mood and getting personalized insights.</p>
-        <a href="{{ url_for('assessment') }}" class="btn">Start Assessment</a>
+    <section class="homepage">
+        <div class="hero">
+            <h1>Welcome to Tranquil Tides</h1>
+            <p>Your personalized mental wellness companion.</p>
+            <a href="{{ url_for('signup') }}" class="btn">Get Started</a>
+        </div>
+
+        <div class="features">
+            <h2>Why Tranquil Tides?</h2>
+            <div class="feature-item">
+                <h3>Self Assessments</h3>
+                <p>Evaluate your mental health with easy-to-use assessments.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Personalized Insights</h3>
+                <p>Receive insights based on your mental health data.</p>
+            </div>
+            <div class="feature-item">
+                <h3>Relaxation Techniques</h3>
+                <p>Explore guided relaxation techniques to calm your mind.</p>
+            </div>
+        </div>
     </section>
 {% endblock %}
