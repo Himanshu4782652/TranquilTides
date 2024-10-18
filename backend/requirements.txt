@@ -1,0 +1,21 @@
+Flask==2.3.2
+Flask-SQLAlchemy==3.0.5
+Flask-WTF==1.1.1
+Flask-Login==0.6.2
+Flask-Script==2.0.6
+Flask-Migrate==4.0.3
+WTForms==3.0.1
+Werkzeug==2.3.6
+
+numpy==1.24.2
+scikit-learn==1.2.2
+
+SQLAlchemy==2.0.17
+gunicorn==21.2.0  # For production server
+psycopg2-binary==2.9.7  # If you're using PostgreSQL
+
+# Environment management
+python-dotenv==1.0.0
+
+# For Heroku/Render deployment (if applicable)
+whitenoise==6.3.0  # Static file serving
