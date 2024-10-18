@@ -1,12 +1,30 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
+
+{% block title %}Relaxation Techniques{% endblock %}
+
 {% block content %}
-    <section class="relaxation-page">
-        <h2>Relaxation Techniques</h2>
-        <p>Here are some techniques to help you relax and improve your mental well-being.</p>
+    <h2>Relaxation Techniques</h2>
+    
+    <section class="relaxation-section">
+        <p>Here are some relaxation techniques tailored for you based on your current mental health status.</p>
+        
+        <h3>Recommended Techniques</h3>
         <ul>
-            <li><strong>Mindful Breathing:</strong> Focus on your breath, inhaling deeply and exhaling slowly.</li>
-            <li><strong>Yoga:</strong> Try simple yoga poses to relieve stress and tension.</li>
-            <li><strong>Meditation:</strong> Practice meditation for a few minutes each day.</li>
+            {% for technique in relaxation_techniques %}
+                <li>{{ technique }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="additional-tips">
+        <h3>Additional Mental Health Tips</h3>
+        <p>Taking care of your mental health is important. Here are some general tips you can follow:</p>
+        <ul>
+            <li>Practice mindfulness and meditation</li>
+            <li>Get enough sleep each night</li>
+            <li>Engage in physical activity regularly</li>
+            <li>Talk to friends and family for support</li>
+            <li>Maintain a balanced diet</li>
         </ul>
     </section>
 {% endblock %}

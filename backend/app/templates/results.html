@@ -1,17 +1,19 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
+
+{% block title %}Assessment Results{% endblock %}
+
 {% block content %}
-    <section class="results-page">
-        <h2>Assessment Results</h2>
-        <p>Based on your inputs, here's your mood prediction:</p>
+    <h2>Your Assessment Results</h2>
+    <p>Your predicted mood state is: <strong>{{ mood_prediction }}</strong></p>
 
-        <div class="result-card">
-            <h3>Prediction: {{ prediction }}</h3>
-            <p>Anxiety: {{ anxiety }}</p>
-            <p>Depression: {{ depression }}</p>
-            <p>Schizophrenia: {{ schizophrenia }}</p>
-            <p>Bipolar: {{ bipolar }}</p>
-        </div>
-
-        <a href="{{ url_for('relaxation') }}" class="btn">Explore Relaxation Techniques</a>
+    <section class="recommendations">
+        <h3>Recommended Relaxation Techniques</h3>
+        <ul>
+            {% for technique in relaxation_techniques %}
+                <li>{{ technique }}</li>
+            {% endfor %}
+        </ul>
     </section>
+
+    <a href="{{ url_for('dashboard') }}" class="btn">Go to Dashboard</a>
 {% endblock %}

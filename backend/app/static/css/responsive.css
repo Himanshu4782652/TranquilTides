@@ -1,0 +1,22 @@
+/* responsive.css */
+
+/* Ensure that the main container is responsive */
+.container {
+ padding: 10px;
+}
+
+/* Form Styles */
+form input,
+form textarea,
+form select {
+ width: 100%;
+}
+
+/* Navigation Styles */
+nav {
+ flex-direction: column;
+}
+
+nav a {
+ padding: 10px;
+}

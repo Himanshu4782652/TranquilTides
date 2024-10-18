@@ -1,23 +1,19 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
+
+{% block title %}Contact Us{% endblock %}
+
 {% block content %}
-    <section class="contact-page">
-        <h2>Contact Us</h2>
-        <p>If you have any questions or need support, feel free to reach out to us.</p>
-        <form method="POST" action="{{ url_for('submit_contact') }}">
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.name.label }}<br>
-                {{ form.name(size=32, class_='form-control') }}
-            </div>
-            <div class="form-group">
-                {{ form.email.label }}<br>
-                {{ form.email(size=32, class_='form-control') }}
-            </div>
-            <div class="form-group">
-                {{ form.message.label }}<br>
-                {{ form.message(class_='form-control') }}
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </section>
+    <h2>Contact Us</h2>
+    <form action="{{ url_for('contact') }}" method="POST">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
 {% endblock %}

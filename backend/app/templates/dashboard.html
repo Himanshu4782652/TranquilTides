@@ -1,42 +1,39 @@
-{% extends "layout.html" %}
-{% block content %}
-    <section class="dashboard">
-        <h2>Welcome, {{ current_user.username }}!</h2>
+{% extends 'layout.html' %}
 
-        <div class="overview">
-            <h3>Your Mood Overview</h3>
-            <p>Here is a summary of your mental health assessment and mood over time:</p>
-            <div id="mood-chart"></div>
+{% block title %}Dashboard - Tranquil Tides{% endblock %}
+
+{% block content %}
+    <h2>Your Mood Dashboard</h2>
+
+    <section class="dashboard-section">
+        <div class="dashboard-overview">
+            <h3>Mood Overview</h3>
+            <p>Latest mood prediction: <strong>{{ latest_mood }}</strong></p>
+            <p>Trend insights: Your mood has been <strong>{{ trend }}</strong> over the past few weeks.</p>
+        </div>
+
+        <div class="chart-container">
+            <h3>Mood Trends</h3>
+            <!-- This will render the dynamic chart using Plotly -->
+            <div id="mood-trend-chart"></div>
         </div>
 
         <div class="recent-assessments">
             <h3>Recent Assessments</h3>
             <ul>
                 {% for assessment in assessments %}
-                    <li>
-                        <strong>Date:</strong> {{ assessment.date }} | 
-                        <strong>Prediction:</strong> {{ assessment.prediction }} 
-                        <a href="{{ url_for('results', assessment_id=assessment.id) }}" class="btn btn-secondary">View Details</a>
-                    </li>
+                    <li>{{ assessment.date }} - Mood: {{ assessment.mood }} - Anxiety: {{ assessment.anxiety }} - Depression: {{ assessment.depression }}</li>
                 {% endfor %}
             </ul>
         </div>
-
-        <div class="actions">
-            <a href="{{ url_for('assessment') }}" class="btn btn-primary">Take a New Assessment</a>
-            <a href="{{ url_for('profile') }}" class="btn btn-secondary">View Your Profile</a>
-        </div>
     </section>
 
-    <script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
     <script>
-        // Plotly chart for mood overview
-        var moodData = {{ mood_data | safe }};
-        var layout = {
-            title: 'Mood Over Time',
-            xaxis: { title: 'Date' },
-            yaxis: { title: 'Mood Level' }
-        };
-        Plotly.newPlot('mood-chart', moodData, layout);
+        // Sample data passed from Flask
+        const moodData = {{ mood_data | tojson }};
+        const dates = {{ dates | tojson }};
+
+        // Call the function to render the chart using the data
+        renderMoodChart('mood-trend-chart', moodData, dates);
     </script>
 {% endblock %}
