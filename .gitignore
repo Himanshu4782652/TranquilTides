@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Environment variables and secrets
+.env
+*.env
+
+# Flask configuration
+instance/
+
+# Pytest cache
+.pytest_cache/
+
+# SQLAlchemy database files
+*.sqlite3
+*.db
+*.db-journal
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Logs
+*.log
+*.out
+*.err
+
+# Virtual environments
+venv/
+.venv/
+
+# Machine Learning model
+models/trained_model.pkl
+
+# Compiled Cython files
+*.c
+*.cpp
+*.h
+*.pyx
+*.pxd
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Frontend dependencies (if used)
+node_modules/
+
+# Static assets
+app/static/js/
+app/static/css/
+
+# Migrations folder (auto-generated files)
+migrations/
+
+# GitHub Actions (optional if you use CI)
+.github/
+
+# Coverage reports
+.coverage
+htmlcov/

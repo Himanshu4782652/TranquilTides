@@ -1,0 +1,19 @@
+# Normalize line endings
+* text=auto
+
+# Python files should always have LF line endings in all environments
+*.py eol=lf
+
+# Treat binary files as-is
+*.pkl binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+
+# Jupyter notebooks as binary
+*.ipynb binary
+
+# Ignore diff for specific files like models or large datasets
+models/trained_model.pkl -diff
