@@ -1,33 +1,43 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf import CSRFProtect
 from flask_migrate import Migrate
 from flask_login import LoginManager
 import os
+# from .routes import main
 
-# Initialize extensions
 db = SQLAlchemy()
-csrf = CSRFProtect()
-migrate = Migrate()
-login_manager = LoginManager()
 
 
-def create_app():
+def create_app(config_name=None):
+    # Create Flask app instance
     app = Flask(__name__)
 
-    # Set configurations
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "supersecretkey")
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    # Determine which config to use based on the environment
+    if config_name is None:
+        config_name = os.getenv("FLASK_ENV", "development")
 
-    # Initialize extensions with app
+    # Load config from the config file dynamically
+    app.config.from_object(f"backend.config.{config_name.capitalize()}Config")
+
+    # Initialize extensions
     db.init_app(app)
-    csrf.init_app(app)
-    migrate.init_app(app, db)
-    login_manager.init_app(app)
-    login_manager.login_view = "login"  # Redirect to login if not authenticated
+    migrate = Migrate(app, db)
 
-    # Import and register Blueprints (routes)
+    # Initialize LoginManager
+    login_manager = LoginManager()
+    login_manager.login_view = "main.login"  # Set the default login view
+    login_manager.init_app(app)
+
+    # User loader callback for Flask-Login
+    from .models import User
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(
+            int(user_id)
+        )  # Flask-Login requires this to load users by ID
+
+    # Register blueprints
     from .routes import main
 
     app.register_blueprint(main)

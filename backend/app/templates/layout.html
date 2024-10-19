@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/dashboard-charts.js') }}"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Link to CSS files -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/responsive.css') }}"
+    />
+   
+    <!-- Title of the Page -->
     <title>{% block title %}Tranquil Tides{% endblock %}</title>
-</head>
-<body>
+    
+    <!-- Include Chart.js from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  
+  <body>
+    <!-- Header with Navigation -->
     <header>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
-                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ url_for('about') }}">About</a></li>
-                <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                <li><a href="{{ url_for('profile') }}">Profile</a></li>
-                {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('login') }}">Login</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('main.index') }}">Home</a></li>
+          <li><a href="{{ url_for('main.dashboard') }}">Dashboard</a></li>
+          <li><a href="{{ url_for('main.about') }}">About</a></li>
+          <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+          <li><a href="{{ url_for('main.profile') }}">Profile</a></li>
+          {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
+          {% else %}
+          <li><a href="{{ url_for('main.login') }}">Login</a></li>
+          <li><a href="{{ url_for('main.signup') }}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
     </header>
 
+    <!-- Main content area -->
     <main>
-        <div class="container">
-            {% block content %}{% endblock %}
+      <div class="container">
+        {% block content %}
+        <!-- Add the canvas for the chart -->
+        <div class="dashboard">
+          <h2>Your Mood Assessment</h2>
+          <canvas id="moodChart" width="400" height="200"></canvas>
         </div>
+        {% endblock %}
+      </div>
     </main>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Tranquil Tides. All rights reserved.</p>
+      <p>&copy; 2024 Tranquil Tides. All rights reserved.</p>
     </footer>
-</body>
+    
+    <!-- Script to handle charts -->
+    <script src="{{ url_for('static', filename='js/dashboard-charts.js') }}"></script>
+  </body>
 </html>

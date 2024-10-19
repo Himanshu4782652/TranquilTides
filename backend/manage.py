@@ -1,40 +1,30 @@
 from app import create_app, db
-from flask_migrate import MigrateCommand
-from flask_script import Manager
+from flask_migrate import Migrate
+from flask.cli import with_appcontext
+import click
 
 app = create_app()
 
-manager = Manager(app)
-
-# Add migration commands
-from flask_migrate import Migrate
-
+# Initialize Flask-Migrate
 migrate = Migrate(app, db)
 
 
-# Manager commands for running app and migrations
-@manager.command
-def run():
-    app.run()
-
-
-@manager.command
+# Custom commands using Flask CLI
+@click.command(name="create_db")
+@with_appcontext
 def create_db():
     """Create the database (sqlite)"""
     db.create_all()
 
 
-@manager.command
+@click.command(name="drop_db")
+@with_appcontext
 def drop_db():
     """Drop the database"""
     db.drop_all()
 
 
-@manager.command
-def seed():
-    """Seed the database with initial data (optional)"""
-    pass  # Add seed logic if needed
-
-
 if __name__ == "__main__":
-    manager.run()
+    app.cli.add_command(create_db)
+    app.cli.add_command(drop_db)
+    app.run()
