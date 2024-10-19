@@ -31,7 +31,7 @@ def about():
 
 
 # Contact page
-@main.route("/contact")
+@main.route("/contact", methods=["GET", "POST"])
 def contact():
     return render_template("contact.html")
 

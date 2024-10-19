@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2>Create a New Account</h2>
-    <form action="{{ url_for('signup') }}" method="POST">
+    <form action="{{ url_for('main.signup') }}" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
